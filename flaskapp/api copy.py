@@ -7,7 +7,9 @@ import os
 import json
 
 from flaskapp.schemas import PostSchema
-from flaskapp.mongodb import MongoDBClient
+
+
+
 # Load Mock JSON Data
 posts = [
     {'id': 1, 'title': 'First Post', 'content': 'This is the first blog post.'},
