@@ -11,5 +11,5 @@ class PostRequestBody(Schema):
 
 # Post Schema
 class PostSchema(PostRequestBody):
-    id = fields.Integer()
+    id = fields.String()
     # Add more fields as needed
