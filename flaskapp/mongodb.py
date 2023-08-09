@@ -28,8 +28,11 @@ class MongoDBClient:
     # Read (Retrieve) operation
     def get_blog_post(self, post_id):
         print(post_id)
-        post = self.collection.find_one({'_id': post_id})
-        return post
+        for document in self.collection.find({}, {'_id': 1}):
+            print(document['_id'])
+            if(str(document['_id']).equals(post_id)):
+                return post
+        return
 
     # Update operation
     def update_blog_post(self, post_id, new_content):

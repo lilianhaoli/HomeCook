@@ -83,7 +83,7 @@ def get_posts():
 
 
 # Retrieve a specific blog post
-@app.route('/posts/<int:post_id>', methods=['GET'])
+@app.route('/posts/<String :post_id>', methods=['GET'])
 def get_post(post_id):
     """get_post.
     ---
@@ -108,7 +108,9 @@ def get_post(post_id):
     """
     #TODO check if ID is avalible before accessing database
     print(post_id)
-    return PostSchema().dumps(blog_manager.get_blog_post(post_id))
+    post = blog_manager.get_blog_post(post_id)
+    if post:
+      return PostSchema().dumps(post)
     return jsonify({'message': 'Post not found'}), 404
 
 
