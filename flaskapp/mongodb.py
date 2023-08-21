@@ -1,7 +1,11 @@
 from pymongo import MongoClient
 from bson import ObjectId
 
+<<<<<<< HEAD
+class BlogManager:
+=======
 class MongoDBClient:
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
     def __init__(self, connection_str=None, database_name=None, collection_name=None):
         self.client = None
         self.db = None
@@ -12,21 +16,53 @@ class MongoDBClient:
             self.collection = self.db[collection_name]
 
     # Create (Insert) operation
+<<<<<<< HEAD
+    def create_blog_post(self, new_post):
+        if new_post:
+            result = self.collection.insert_one(new_post)
+            if result:
+                print(f"Inserted document ID: {result.inserted_id}")
+                return self.get_blog_post(str(result.inserted_id))
+        return {}
+=======
     def create_blog_post(self, post):
         result = self.collection.insert_one(post)
         print(f"Inserted document ID: {result.inserted_id}")
         return self.get_blog_post(result.inserted_id)
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 
     # Retrieve all blog posts
     def get_all_posts(self):
         posts = self.collection.find()
+<<<<<<< HEAD
+=======
         #print(list(posts))
         for document in self.collection.find({}, {'_id': 1}):
             print(document['_id'])
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
         return list(posts)
 
     # Read (Retrieve) operation
     def get_blog_post(self, post_id):
+<<<<<<< HEAD
+        post = self.collection.find_one({'_id': ObjectId(post_id)})
+        post['id'] = post_id
+        return post
+
+    # Update operation
+    def update_blog_post(self, post_id, updated_post):
+        result = self.collection.update_one({'_id': ObjectId(post_id)}, {'$set': updated_post})
+        print(f"Matched count: {result.matched_count}, Modified count: {result.modified_count}")
+        return self.get_blog_post(post_id)
+
+    # Delete operation
+    def delete_blog_post(self, post_id):
+        result = self.collection.delete_one({'_id': ObjectId(post_id)})
+        print(f"Deleted count: {result.deleted_count}")
+        if result and result.deleted_count:
+            return True
+        return False
+=======
         print(post_id)
         for document in self.collection.find({}, {'_id': 1}):
             print(document['_id'])
@@ -67,3 +103,4 @@ class MongoDBClient:
 
 # # Delete a blog post
 #mongodb_client.delete_blog_post(post_id='<post_id>')
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c

@@ -11,10 +11,18 @@
 #
 # Happy Coding!
 
+<<<<<<< HEAD
+service: feed-backend
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+useDotenv: true
+=======
 service: my-service
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -22,7 +30,11 @@ frameworkVersion: '3'
 
 provider:
   name: aws
+<<<<<<< HEAD
+  runtime: python3.7
+=======
   runtime: python3.8
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 
 # you can overwrite defaults here
 #  stage: dev
@@ -64,6 +76,13 @@ functions:
     events:
       - http: ANY /
       - http: 'ANY /{proxy+}'
+<<<<<<< HEAD
+    environment:
+      stageName: ${sls:stage}
+      database_name: ${env:database_name}
+      collection_name: ${env:collection_name}
+=======
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
@@ -100,6 +119,15 @@ functions:
 #            host: example.com
 #            path: /hello
 
+<<<<<<< HEAD
+custom:
+  wsgi:
+    app: flaskapp/api.app
+    packRequirements: false
+    # pythonBin: python3.6
+
+=======
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 #    Define function environment variables here
 #    environment:
 #      variable2: value2
@@ -116,10 +144,13 @@ functions:
 #       Description: "Description for the output"
 #       Value: "Some output value"
 
+<<<<<<< HEAD
+=======
 custom:
   wsgi:
     app: flaskapp/api.app
     packRequirements: false
 
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 plugins:
   - serverless-wsgi

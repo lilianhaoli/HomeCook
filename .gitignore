@@ -1,6 +1,11 @@
 # Distribution / packaging
 .Python
 env/
+<<<<<<< HEAD
+venv/
+.env
+=======
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 build/
 develop-eggs/
 dist/
@@ -15,7 +20,19 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+<<<<<<< HEAD
+.DS_Store
 
 # Serverless directories
 .serverless
 node_modules/
+__pycache__
+venv
+.env
+.DS_Store
+=======
+
+# Serverless directories
+.serverless
+node_modules/
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c

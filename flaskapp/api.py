@@ -7,6 +7,18 @@ import os
 import json
 
 from flaskapp.schemas import PostSchema
+<<<<<<< HEAD
+from flaskapp.mongodb import BlogManager
+
+# Load Mock JSON Data
+posts = []
+with open("static/mock_data.json", "r") as f:
+    posts = json.load(f)
+
+mongodb_connection_string = 'mongodb://localhost:27017/'
+# TODO: create client w/ mongodb_connection_string and pass to BlogManager
+blog_manager = BlogManager(connection_str=mongodb_connection_string, database_name='test_database', collection_name='test_collection')
+=======
 from flaskapp.mongodb import MongoDBClient
 # Load Mock JSON Data
 #posts = [
@@ -20,6 +32,7 @@ from flaskapp.mongodb import MongoDBClient
 
 mongodb_connection_string = "mongodb://localhost:27017/"
 blog_manager = MongoDBClient(connection_str=mongodb_connection_string, database_name="test_database", collection_name= "test_collection")
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 
 # Initialize Flask App
 app = Flask(__name__)
@@ -51,12 +64,21 @@ def create_post():
             application/json:
               schema: PostSchema
     """
+<<<<<<< HEAD
+    post_schema = PostSchema()
+    new_post = post_schema.dump({'title': request.json['title'], 'content': request.json['content']})
+    new_post_resp = blog_manager.create_blog_post(new_post)
+    if new_post_resp:
+      return jsonify(post_schema.dump(new_post_resp)), 201
+    return {}, 500
+=======
     new_post = {'title': request.json['title'], 'content': request.json['content']}
     new_post_resp = blog_manager.create_blog_post(new_post)
     #posts.append(new_post)
     if new_post_resp:
       return jsonify(PostSchema().dump(new_post_resp)), 201
     return {},500
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 
 
 # Retrieve all blog posts
@@ -83,7 +105,11 @@ def get_posts():
 
 
 # Retrieve a specific blog post
+<<<<<<< HEAD
+@app.route('/posts/<string:post_id>', methods=['GET'])
+=======
 @app.route('/posts/<String :post_id>', methods=['GET'])
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 def get_post(post_id):
     """get_post.
     ---
@@ -106,6 +132,17 @@ def get_post(post_id):
               schema: 
                 message: string
     """
+<<<<<<< HEAD
+    post = blog_manager.get_blog_post(post_id)
+    if post:
+        return PostSchema().dumps(post)
+    return jsonify({'error': 'Post not found'}), 404
+
+
+# Update a blog post
+@app.route('/posts/<string:post_id>', methods=['PUT'])
+def update_post(post_id):
+=======
     #TODO check if ID is avalible before accessing database
     print(post_id)
     post = blog_manager.get_blog_post(post_id)
@@ -117,6 +154,7 @@ def get_post(post_id):
 # Update a blog post
 @app.route('/posts/<int:post_id>', methods=['PUT'])
 def update_post(post_id, content):
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
     """update_post.
     ---
     put:
@@ -143,6 +181,18 @@ def update_post(post_id, content):
               schema: 
                 message: string
     """
+<<<<<<< HEAD
+    req_body = request.json
+    updated_post = PostSchema().dump(req_body)
+    post = blog_manager.update_blog_post(post_id, updated_post)
+    if post:
+      return PostSchema().dump(post)
+    return jsonify({'error': 'Post not found'}), 404
+
+
+# Delete a blog post
+@app.route('/posts/<string:post_id>', methods=['DELETE'])
+=======
 
     #post['content'] = req_body.get('content')
     return PostSchema().dumps(blog_manager.update_blog_post(post_id,content))
@@ -151,6 +201,7 @@ def update_post(post_id, content):
 
 # Delete a blog post
 @app.route('/posts/<int:post_id>', methods=['DELETE'])
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 def delete_post(post_id):
     """delete_post.
     ---
@@ -174,9 +225,16 @@ def delete_post(post_id):
               schema: 
                 message: string
     """
+<<<<<<< HEAD
+    delete_post = blog_manager.delete_blog_post(post_id)
+    if delete_post:
+        return jsonify({'message': 'Post deleted'})
+    return jsonify({'error': 'Post not found'}), 404
+=======
     if blog_manager.delete_blog_post(post_id):
         return jsonify({'message': 'Post deleted'})
     return jsonify({'message': 'Post not found'}), 404
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 
 
 # Add more routes and functionality as needed
@@ -216,10 +274,22 @@ with app.test_request_context():
     spec.path(view=delete_post)
     
     # create swagger.json file
+<<<<<<< HEAD
+    print("writing swagger JSON")
+=======
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
     json_data = spec.to_dict()
     with open("static/swagger.json", "w") as f:
         json.dump(json_data, f)
 
+<<<<<<< HEAD
+    # create swagger.yml file
+    print("writing swagger YAML")
+    with open('static/swagger.yml', 'w') as f:
+        f.write(spec.to_yaml())
+
+=======
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
 # Run the app locally
 if __name__ == '__main__':
     app.run()

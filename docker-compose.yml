@@ -8,4 +8,8 @@ services:
     volumes:
       - mongodb_data:/data/db
 volumes:
+<<<<<<< HEAD
   mongodb_data:
+=======
+  mongodb_data:
+>>>>>>> b36b52cbd148fbe474ee9b0690b397ea6ef1291c
