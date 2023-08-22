@@ -1,7 +1,7 @@
 from unittest.mock import MagicMock
 import pytest
 from pymongo import MongoClient
-from flaskapp.mongodb import BlogManager
+from flaskapp.mongodb import MongoDBClient
 
 
 
@@ -28,7 +28,7 @@ collection_mock.delete_one.return_value.deleted_count = len(test_collection)
 db_mock.collection = collection_mock # Configure the db_mock to return the collection_mock for the 'collection' attribute
 mongo_client_mock.db = db_mock # Configure the mongo_client_mock to return the db_mock for the 'db' attribute
 
-blog_manager = BlogManager()
+blog_manager = MongoDBClient()
 blog_manager.collection = mongo_client_mock.db.collection
 
 

@@ -2,10 +2,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-posts = [
-    {'id': 1, 'title': 'First Post', 'content': 'This is the first blog post.'},
-    {'id': 2, 'title': 'Second Post', 'content': 'This is the second blog post.'}
-]
+
 
 @app.route('/posts', methods=['POST'])
 def create_post():

@@ -125,9 +125,9 @@ components:
     Post:
       type: object
       properties:
-        title:
-          type: string
         id:
+          type: string
+        title:
           type: string
         content:
           type: string
