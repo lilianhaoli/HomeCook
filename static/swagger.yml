@@ -118,16 +118,16 @@ components:
     PostRequestBody:
       type: object
       properties:
-        title:
-          type: string
         content:
+          type: string
+        title:
           type: string
     Post:
       type: object
       properties:
         id:
           type: string
-        title:
-          type: string
         content:
+          type: string
+        title:
           type: string
